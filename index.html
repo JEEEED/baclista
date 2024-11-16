@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Espera - BAURU AUTO CAR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <div class="theme-switch">
+        <button id="themeToggle" onclick="toggleTheme()">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+    <div class="container">
+        <h1 class="logo">Lista de Espera - BAURU AUTO CAR</h1>
+        
+        <div class="form-container">
+            <input type="text" id="nome" placeholder="Nome do Cliente">
+            <input type="tel" id="telefone" placeholder="Telefone">
+            <input type="text" id="carro" placeholder="Carro Desejado">
+            <button onclick="adicionarCliente()">Adicionar à Lista</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Carro Desejado</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaClientes">
+                    <!-- Lista será preenchida via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>Desenvolvido por: Jeff Kevyn</p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
