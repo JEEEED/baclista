@@ -154,4 +154,44 @@ footer {
     color: var(--text-color);
     border-top: 1px solid var(--table-border);
     transition: all 0.3s ease;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border-radius: 25px;
+    border: 2px solid var(--table-border);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.highlight {
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.hidden {
+    display: none;
 } 

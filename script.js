@@ -56,21 +56,33 @@ function atualizarTabela(snapshot) {
     const tbody = document.getElementById('listaClientes');
     tbody.innerHTML = '';
 
+    // Converte snapshot em array para ordenação
+    const clientes = [];
     snapshot.forEach((childSnapshot) => {
-        const cliente = childSnapshot.val();
-        const clienteId = childSnapshot.key;
+        clientes.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+        });
+    });
 
+    // Ordena por data
+    clientes.sort((a, b) => new Date(a.data) - new Date(b.data));
+
+    clientes.forEach((cliente) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${cliente.nome}</td>
             <td>${cliente.telefone}</td>
             <td>${cliente.carro}</td>
             <td>
-                <button class="btn-remover" onclick="removerCliente('${clienteId}')">Remover</button>
+                <button class="btn-remover" onclick="removerCliente('${cliente.id}')">Remover</button>
             </td>
         `;
         tbody.appendChild(tr);
     });
+
+    // Reaplica o filtro de pesquisa após atualizar a tabela
+    pesquisarLista();
 }
 
 // Função para limpar formulário
@@ -105,4 +117,33 @@ function toggleTheme() {
     const currentTheme = localStorage.getItem('theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+}
+
+// Adicione esta nova função
+function pesquisarLista() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const tbody = document.getElementById('listaClientes');
+    const rows = tbody.getElementsByTagName('tr');
+
+    for (let row of rows) {
+        const nome = row.cells[0].textContent.toLowerCase();
+        const telefone = row.cells[1].textContent.toLowerCase();
+        const carro = row.cells[2].textContent.toLowerCase();
+
+        if (nome.includes(searchTerm) || 
+            telefone.includes(searchTerm) || 
+            carro.includes(searchTerm)) {
+            row.classList.remove('hidden');
+            
+            // Adiciona highlight se houver termo de pesquisa
+            if (searchTerm) {
+                row.classList.add('highlight');
+            } else {
+                row.classList.remove('highlight');
+            }
+        } else {
+            row.classList.add('hidden');
+            row.classList.remove('highlight');
+        }
+    }
 } 
